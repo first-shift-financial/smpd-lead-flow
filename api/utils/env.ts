@@ -7,9 +7,15 @@ const REQUIRED = [
   'CLOSER_2_PHONE'
 ];
 
-export function ensureEnv(throwOnMissing = false) {
+/**
+ * Ensure environment variables exist.
+ * @param throwOnMissing if true, throws an Error when required vars are missing
+ * @param extraKeys optional additional env keys to validate
+ */
+export function ensureEnv(throwOnMissing = false, extraKeys: string[] = []) {
+  const keys = REQUIRED.concat(extraKeys);
   const missing: string[] = [];
-  for (const key of REQUIRED) {
+  for (const key of keys) {
     if (!process.env[key]) missing.push(key);
   }
   if (missing.length && throwOnMissing) {

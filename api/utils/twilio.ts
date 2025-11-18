@@ -1,4 +1,8 @@
 import Twilio from 'twilio';
+import { ensureEnv } from './env';
+
+// Fail fast if required Twilio env vars are missing
+ensureEnv(true, []);
 
 const SID = process.env.TWILIO_SID;
 const TOKEN = process.env.TWILIO_TOKEN;

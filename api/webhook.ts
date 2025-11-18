@@ -5,6 +5,10 @@ import { sendSms } from './utils/twilio';
 import { sendLovable } from './utils/lovable';
 import { notifySlack } from './utils/notify';
 import { triggerDashboard } from './utils/vercel-dashboard';
+import { ensureEnv } from './utils/env';
+
+// Fail fast on missing core env vars (Twilio creds, closer numbers, etc.)
+ensureEnv(true);
 
 const LeadSchema = z.object({
   firstName: z.string().optional(),
