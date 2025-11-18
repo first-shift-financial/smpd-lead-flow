@@ -19,6 +19,30 @@ Environment variables
   - `SUPABASE_SERVICE_KEY`
   - `SLACK_WEBHOOK` (optional)
 
+How to configure env vars on Vercel
+
+- Go to your Vercel project dashboard -> Settings -> Environment Variables.
+- Add the variables above as *Environment Variables* (do not commit them into the repo).
+- For local testing, create a `.env` file (listed in `.gitignore`) with the same names. Example:
+
+```bash
+# .env (do NOT commit)
+TWILIO_SID=sk_xxx
+TWILIO_TOKEN=twilio_token
+TWILIO_FROM=+15551234567
+YOUR_PHONE=+15559876543
+CLOSER_1_PHONE=+15550000001
+CLOSER_2_PHONE=+15550000002
+LOVABLE_WEBHOOK_URL=https://hooks.example.com/lov
+SUPABASE_SERVICE_KEY=service_key_here
+SLACK_WEBHOOK=https://hooks.slack.com/services/XXX/YYY/ZZZ
+```
+
+Runtime helpers
+
+- The project includes `api/utils/env.ts` which exposes `ensureEnv()` to detect missing required env vars at runtime. It is safe to use this in startup paths to fail early when variables are missing.
+
+
 Files of interest
 - `api/webhook.ts` — main POST handler for incoming lead webhooks.
 - `api/utils/*` — helpers: `enrich.ts`, `score.ts`, `twilio.ts`, `lovable.ts`, `vercel-dashboard.ts`, `notify.ts`.
